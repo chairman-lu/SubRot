@@ -1,0 +1,72 @@
+# VLMRot Configuration Example
+# This file demonstrates all available parameters for the utils.parser_gen() function
+
+# ============================================================================
+# Model Configuration
+# ============================================================================
+model: llava-hf/llava-v1.6-vicuna-7b-hf  # Model to load
+model_path: /home/disk/workspace/models/LLaVA-Next/llava-v1.6-vicuna-7b-hf
+
+seed: 42  # Random seed for HuggingFace and PyTorch
+
+# ============================================================================
+# Calibration Settings
+# ============================================================================
+tag: 15epoch
+quant_vit: false
+scale_smooth: False          # Enable Smoothquant-like scale smoothing
+smoothquant: False
+mbq: False
+mbq_scale_path: cache/mbq/llava-next-7b-W4A4.pt
+mbq_load_scales: False
+quarot: False
+offline_rotate: False       # Apply offline rotation without online Hadamard
+online_rotate: False        # Add online Hadamard for o, v, and down_proj linear layers
+spinquant: False
+# trained_R1_R2_path: cache/rotation_matrix/llava-next-7b/R_w4a4_llava_next_r1.bin
+
+# FlatQuant example (disabled by default; set spinquant/offline_rotate/online_rotate False):
+flatquant: True
+flatquant_matrix_path: cache_final/flatquant/llava-v1.6-vicuna-7b-hf/w4a4/15epoch/flat_matrices.pth
+save_flatquant_dir: cache/flatquant/
+epochs: 15
+cali_bsz: 4
+flat_lr: 0.005
+cali_trans: True
+add_diag: True
+lwc: True
+lac: True
+
+
+w_bits: 4                   # Number of bits for weight quantization
+a_bits: 4                   # Number of bits for activation quantization
+# k_bits: 4
+# v_bits: 4
+a_clip_ratio: 0.9
+nsamples: 128               # Number of calibration data samples for GPTQ
+cal_dataset: ScienceQA_Train
+question_file: /home/disk/workspace/QSVD/myllava/playground/data/eval/scienceqa/llava_train_QCM-LEA.json
+image_base: /home/disk/workspace/QSVD/myllava/playground/data/eval/scienceqa/images/train
+
+# ============================================================================
+# Quantization Settings
+# ============================================================================
+quant_method: rtn  # Quantization method: 'rtn' or 'gptq'
+
+
+# ============================================================================
+# Evaluation Settings
+# ============================================================================
+eval_dataset:
+  # # - ScienceQA_TEST
+  - MMMU_DEV_VAL
+  - OCRBench
+  - VizWiz
+  # - TextVQA_VAL
+  - ChartQA_TEST
+  - SEEDBench2_Plus
+
+# ============================================================================
+# Profile Settings
+# ============================================================================
+
