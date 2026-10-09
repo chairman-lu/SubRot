@@ -24,7 +24,7 @@ spinquant: False
 
 # FlatQuant example (disabled by default; set spinquant/offline_rotate/online_rotate False):
 flatquant: True
-flatquant_matrix_path: cache/flatquant/llava-v1.6-vicuna-7b-hf/w4a4/subrot/flat_matrices.pth
+flatquant_matrix_path: cache/subspaceloss/llava-v1.6-vicuna-7b-hf_subspace_on_flatquant_with_a_128.pt
 save_flatquant_dir: cache/flatquant/
 epochs: 15
 cali_bsz: 4
